@@ -1,0 +1,8 @@
+[
+{
+  "directory": "D:/lessons/c++/Vector(array)/build",
+  "command": "C:\\mingw64\\bin\\g++.exe   -g -o CMakeFiles\\vector.dir\\main.cpp.obj -c D:\\lessons\\c++\\Vector(array)\\main.cpp",
+  "file": "D:/lessons/c++/Vector(array)/main.cpp",
+  "output": "CMakeFiles/vector.dir/main.cpp.obj"
+}
+]
