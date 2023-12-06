@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/vector.dir/cpp/myvector.cpp.obj"
+  "CMakeFiles/vector.dir/cpp/myvector.cpp.obj.d"
   "CMakeFiles/vector.dir/main.cpp.obj"
   "CMakeFiles/vector.dir/main.cpp.obj.d"
   "libvector.dll.a"
