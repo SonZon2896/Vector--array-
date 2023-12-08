@@ -124,9 +124,10 @@ T &myvector<T>::append(size_t index, void *data)
 }
 
 template <typename T>
-T &myvector<T>::emplace_back(void *data)
+template <typename... Args>
+T &myvector<T>::emplace_back(Args &&...args)
 {
-    return append(size, *(T *)data);
+    return append(size, *(new T(std::forward<Args>(args)...)));
 }
 
 template <typename T>

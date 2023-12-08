@@ -25,7 +25,8 @@ public:
     T &append(size_t, void *);
     T &append(size_t, T);
     T &append(size_t);
-    T &emplace_back(void *);
+    template <typename... Args>
+    T &emplace_back(Args &&...args);
     T &push_back(T);
     T &push_back();
     T pop(size_t);

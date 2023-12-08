@@ -27,11 +27,11 @@ int main()
     vec.reserve(15);
     for (size_t i = 0; i < 5; ++i)
     {
-        vec.emplace_back(new Point{i, i + 1});
+        vec.emplace_back(i, i + 1);
         std::cout << vec << std::endl;
     }
     std::cout << std::endl;
-    vec.emplace_back((void *)(new Point(2, 5)));
+    vec.emplace_back(2, 5);
     std::cout << vec << std::endl;
     vec.append(2, (void *)(new Point(10, 20)));
     std::cout << vec << std::endl;
