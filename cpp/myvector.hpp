@@ -35,7 +35,9 @@ size_t myvector<T>::Size() const
 template <typename T>
 T &myvector<T>::operator[](int index)
 {
-    return (*this)[size - index % size];
+    if (index < 0)
+        return array[(int)size + index % (int)size];
+    return array[index % (int)size];
 }
 
 template <typename T>
@@ -45,42 +47,19 @@ T &myvector<T>::operator[](size_t index)
 }
 
 template <typename T>
-auto myvector<T>::operator[](std::pair<size_t, size_t> index)
+myvector<T>& myvector<T>::reserve(size_t size)
 {
-    if (index.second < index.first)
+    if (reserved_size >= size)
     {
-        size_t temp = std::move(index.first);
-        index.first = std::move(index.second);
-        index.second = std::move(temp);
+        return *this;
     }
-    myvector<T &> myvec(index.second - index.first + 1);
-    for (size_t i = 0; i < myvec.size(); ++i)
-        myvec[i] = array[i + index.first];
-    return myvec;
-}
-
-template <typename T>
-auto myvector<T>::operator=(myvector<T> myvec)
-{
-    size = myvec.size();
-    if (myvec.size() > reserved_size)
-    {
-        reserved_size = 0;
-        delete[] array;
-        array = new T[size];
-    }
-    for (size_t i = 0; i < size; ++i)
-        array[i] = myvec[i];
-    return this;
-}
-
-template <typename T>
-void myvector<T>::reserve(size_t size)
-{
     reserved_size = size;
-    this->size = 0;
-    delete array;
+    T* temp = array;
     array = new T[reserved_size];
+    for (size_t i = 0; i < this->size; ++i)
+        array[i] = temp[i];
+    delete temp;
+    return *this;
 }
 
 template <typename T>
@@ -91,7 +70,7 @@ T &myvector<T>::append(size_t index, T value)
     if (++size > reserved_size)
     {
         reserved_size = 0;
-        auto temp = std::move(array);
+        auto temp = array;
         array = new T[size];
         for (size_t i = 0; i < index; ++i)
             array[i] = temp[i];
@@ -106,6 +85,13 @@ T &myvector<T>::append(size_t index, T value)
 }
 
 template <typename T>
+template <typename... Args>
+T &myvector<T>::emplace(size_t index, Args&&... args)
+{
+    return append(index, *(new T(std::forward<Args>(args)...)));
+}
+
+template <typename T>
 T &myvector<T>::append(size_t index)
 {
     return append(index, T());
@@ -115,12 +101,6 @@ template <typename T>
 T &myvector<T>::push_back(T value)
 {
     return append(size, value);
-}
-
-template <typename T>
-T &myvector<T>::append(size_t index, void *data)
-{
-    return append(index, *(T *)data);
 }
 
 template <typename T>

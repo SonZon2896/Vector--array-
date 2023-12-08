@@ -18,15 +18,14 @@ public:
 
     T &operator[](int);
     T &operator[](size_t);
-    auto operator[](std::pair<size_t, size_t>);
-    auto operator=(myvector<T>);
 
-    void reserve(size_t);
-    T &append(size_t, void *);
+    myvector<T>& reserve(size_t);
     T &append(size_t, T);
     T &append(size_t);
+    template<typename... Args>
+    T &emplace(size_t, Args &&...);
     template <typename... Args>
-    T &emplace_back(Args &&...args);
+    T &emplace_back(Args &&...);
     T &push_back(T);
     T &push_back();
     T pop(size_t);

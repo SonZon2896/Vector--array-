@@ -24,21 +24,35 @@ std::ostream &operator<<(std::ostream &os, const Point& point)
 int main()
 {
     myvector<Point> vec(5);
-    vec.reserve(15);
+    // vec.reserve(15);
     for (size_t i = 0; i < 5; ++i)
     {
-        vec.emplace_back(i, i + 1);
-        std::cout << vec << std::endl;
+        vec[i] = {i, i + 1};
+        std::cout << "vec[i] = {i, i + 1}\t" << vec << std::endl;
     }
+    std::cout << "Size()\t\t\t" << vec.Size() << std::endl;
     std::cout << std::endl;
-    vec.emplace_back(2, 5);
-    std::cout << vec << std::endl;
-    vec.append(2, (void *)(new Point(10, 20)));
-    std::cout << vec << std::endl;
-    vec.append(4, {20, 10});
-    std::cout << vec << std::endl;
+    vec.emplace_back(0, 10);
+    std::cout << "emplace_back(0, 10)\t" << vec << std::endl;
+    vec.emplace(3, 10, 20);
+    std::cout << "emplace(3, 10, 20)\t" << vec << std::endl;
+    vec.append(2);
+    std::cout << "append(2)\t\t" << vec << std::endl;
+    vec.append(4, {20, 30});
+    std::cout << "append(4, {20, 30})\t" << vec << std::endl;
+    vec.push_back({30, 40});
+    std::cout << "push_back({30, 40})\t" << vec << std::endl;
     vec.push_back();
-    std::cout << vec << std::endl;
+    std::cout << "push_back()\t\t" << vec << std::endl;
+    vec.pop(2);
+    std::cout << "pop(2)\t\t\t" << vec << std::endl;
+    vec.pop();
+    std::cout << "pop()\t\t\t" << vec << std::endl;
+    vec.reserve(5);
+    vec.reserve(20);
+    std::cout << "vec[2]\t\t\t" << vec[2] << std::endl; 
+    std::cout << "vec[-1]\t\t\t" << vec[-1] << std::endl; 
+    std::cout << "vec.Size()\t\t" << vec.Size() << std::endl;
 
     return 0;
 }
