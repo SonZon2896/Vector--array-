@@ -33,7 +33,7 @@ size_t myvector<T>::Size() const
 }
 
 template <typename T>
-T &myvector<T>::operator[](int index)
+T &myvector<T>::operator[](int index) const
 {
     if (index < 0)
         return array[(int)size + index % (int)size];
@@ -41,7 +41,7 @@ T &myvector<T>::operator[](int index)
 }
 
 template <typename T>
-T &myvector<T>::operator[](size_t index)
+T &myvector<T>::operator[](size_t index) const
 {
     return array[index % size];
 }

@@ -16,8 +16,8 @@ public:
 
     size_t Size() const;
 
-    T &operator[](int);
-    T &operator[](size_t);
+    T &operator[](int) const;
+    T &operator[](size_t) const;
 
     myvector<T>& reserve(size_t);
     T &append(size_t, T);
