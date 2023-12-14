@@ -98,14 +98,16 @@ private:
     size_t reserved_size;
 
 public:
-    myvector();
-    myvector(size_t);
     myvector(size_t, T);
+    myvector(int, T);
+    myvector(size_t);
+    myvector(int);
+    myvector();
 
     size_t Size() const;
 
-    T &operator[](int);
-    T &operator[](size_t);
+    T &operator[](int) const;
+    T &operator[](size_t) const;
 
     myvector<T>& reserve(size_t);
     T &append(size_t, T);

@@ -1,11 +1,49 @@
-#include "myvector.h"
+#pragma once
+#include <iostream>
 
 template <typename T>
-myvector<T>::myvector()
+class myvector
+{
+private:
+    T *array;
+    size_t size;
+    size_t reserved_size;
+
+public:
+    myvector(size_t, T);
+    myvector(int, T);
+    myvector(size_t);
+    myvector(int);
+    myvector();
+
+    size_t Size() const;
+
+    T &operator[](int) const;
+    T &operator[](size_t) const;
+
+    myvector<T>& reserve(size_t);
+    T &append(size_t, T);
+    T &append(size_t);
+    template<typename... Args>
+    T &emplace(size_t, Args &&...);
+    template <typename... Args>
+    T &emplace_back(Args &&...);
+    T &push_back(T);
+    T &push_back();
+    T pop(size_t);
+    T pop();
+
+    ~myvector();
+};
+
+template <typename T>
+myvector<T>::myvector(size_t size, T value)
 {
     reserved_size = 0;
-    size = 0;
-    array = new T[0];
+    this->size = size;
+    array = new T[size];
+    for (size_t i = 0; i < size; ++i)
+        array[i] = value;
 }
 
 template <typename T>
@@ -17,13 +55,33 @@ myvector<T>::myvector(size_t size)
 }
 
 template <typename T>
-myvector<T>::myvector(size_t size, T value)
+myvector<T>::myvector(int size, T value)
 {
+    if (size < 0)
+        throw std::runtime_error("vector bad length");
     reserved_size = 0;
     this->size = size;
     array = new T[size];
-    for (size_t i = 0; i < size; ++i)
+    for (int i = 0; i < size; ++i)
         array[i] = value;
+}
+
+template <typename T>
+myvector<T>::myvector(int size)
+{
+    if (size < 0)
+        throw std::runtime_error("vector bad lengt");
+    reserved_size = 0;
+    this->size = size;
+    array = new T[size];
+}
+
+template <typename T>
+myvector<T>::myvector()
+{
+    reserved_size = 0;
+    this->size = 0;
+    array = new T[0];
 }
 
 template <typename T>

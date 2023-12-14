@@ -1,4 +1,4 @@
-#include "cpp/myvector.hpp"
+#include "myvector.h"
 #include <iostream>
 // #include <vector>
 #include <string>
@@ -25,7 +25,7 @@ int main()
 {
     myvector<Point> vec(5);
     // vec.reserve(15);
-    for (size_t i = 0; i < 5; ++i)
+    for (int i = 0; i < vec.Size(); ++i)
     {
         vec[i] = {i, i + 1};
         std::cout << "vec[i] = {i, i + 1}\t" << vec << std::endl;
